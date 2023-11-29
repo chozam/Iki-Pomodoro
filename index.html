@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Pomodoro</title>
+</head>
+<body>
+    <section id="Home">
+    <header>
+        <div class="header">
+        <p>IKI POMODORO</p>
+        <nav>
+            <a href="#Home">Home</a>
+            <a href="#About">About</a>
+        </nav>
+        <p>Focus Time: <span id="total-focus">0</span> s</p>
+    </div>
+    </header>
+    <section class="container" id="Home">
+        <audio id="music" volume="0.1">
+            <source id="audio-source" src="./guitar-riff.mp3" type="audio/mpeg">
+        </audio>
+        <div id="pomodoro">
+           <div id="display-timer">
+            <div>
+                <span class="label-timer warna-focus" id="label-state">FOCUS</span>
+                <span class="label-timer">SESSION</span>
+            </div>
+            <div id="timer">
+                <span id="minute">25</span>
+                <span>.</span>
+                <span id="second">00</span>
+            </div>
+           </div>
+           <div class="state-pdmr">
+            <button id="btn-focus">FOCUS</button>
+            <button id="btn-break">BREAK</button>
+            <button id="btn-long-break">LONG BREAK</button>
+           </div>
+           <div id="setting-1">
+            <div>
+                <p class="setting-label">Pomodoro</p>
+                <input type="number" name="pomodoro" id="set-pomodoro" min="0" max="59" value="25">
+            </div>
+            <div>
+                <p class="setting-label">Break</p>
+                <input type="number" name="break" id="set-break" min="0" max="59" value="5">
+            </div>
+            <div>
+                <p class="setting-label">Long Break</p>
+                <input type="number" name="longbreak" id="set-long-break" min="0" max="59" value="15">
+            </div>
+            <div id="setting-2">
+            <div>
+                <p class="setting-label">Long Break Interval</p>
+                <input type="number" name="interval" id="set-interval" min="0" max="59" value="4">
+            </div>
+            <button id="save">Save</button>
+        </div>
+        </div>
+           <div class="kontrol">
+            <button id="start">START</button>
+            <button id="reset">RESET</button>
+           </div>
+        </div>
+    </section>
+</section>
+    <section id="About">
+        <h2>About Pomodoro</h2>
+        <div class="content-about">
+        <div class="bottom">
+        <p>The Pomodoro Technique is a time management method developed by Francesco Cirillo in the late 1980s.[1] It uses a kitchen timer to break work into intervals, typically 25 minutes in length, separated by short breaks. Each interval is known as a pomodoro, from the Italian word for tomato, after the tomato-shaped kitchen timer Cirillo used as a university student.
+            Apps and websites providing timers and instructions have widely popularized the technique. Closely related to concepts such as timeboxing and iterative and incremental development used in software design, the method has been adopted in pair programming contexts.</p>
+        </div>
+        <div class="atur">
+        <div class="bottom">
+            <p>The original technique has six steps:
+            <ol>
+            <li>Decide on the task to be done.</li>
+            <li>Set the Pomodoro timer (typically for 25 minutes).</li>
+            <li>Work on the task.</li>
+            <li>End work when the timer rings and take a short break (typically 5–10 minutes).</li>
+            <li>Go back to Step 2 and repeat until you complete four pomodoros.</li>
+            <li>After four pomodoros are done, take a long break (typically 20 to 30 minutes) instead of a short break. Once the long break is finished, return to step 2.</li>
+            </ol>
+        </div>
+        <img src="img/pomodoro_method.jpg" alt="">
+    </div>
+    </div>
+        </div>
+    </section>
+    <footer>
+        <p>&copy; 2023 Chozam. All rights reserved.
+
+        </p></footer>
+    <script type="module" src="main.js"></script>
+</body>
+</html>
