@@ -161,6 +161,7 @@ class Timer {
     }
 }
 
+
 export class Pomodoro extends Timer {
     #time_focus;
     #time_break;
@@ -185,38 +186,6 @@ export class Pomodoro extends Timer {
         this.#time_longbreak = time_longbreak;
         this.#long_break_interval = interval;
         this.set_Time(time_focus * 60);
-    }
-
-    get_Button_Focus() {
-        return this.#btn_focus;
-    }
-
-    set_Button_Focus(value){
-        this.#btn_focus = document.getElementById(value);
-    }
-
-    get_Button_Break(){
-        return this.#btn_break;
-    }
-
-    set_Button_Break(value){
-        this.#btn_break = document.getElementById(value);
-    }
-
-    get_Button_Long_Break(){
-        return this.#btn_long_break;
-    }
-
-    set_Button_Long_Break(value){
-        this.#btn_long_break = document.getElementById(value);
-    }
-
-    get_Button_Save(){
-        return this.#btn_save;
-    }
-
-    set_Button_Save(value){
-        this.#btn_save = document.getElementById(value);
     }
 
     get_Time_Focus(){
@@ -250,13 +219,13 @@ export class Pomodoro extends Timer {
     set_Long_Break_Interval(value){
         this.#long_break_interval = document.getElementById(value).value;
     }
-
-    get_Label_State(){
-        return this.#label_state;
+    
+    get_Acuan(){
+        return this.#acuan;
     }
 
-    set_Label_State(value){
-        this.#label_state = document.getElementById(value);
+    set_Acuan(value){
+        this.#acuan = value;
     }
 
     get_Total_Focus(){
@@ -275,19 +244,19 @@ export class Pomodoro extends Timer {
         this.#total = value;
     }
 
-    get_Acuan(){
-        return this.#acuan;
+    get_Label_State(){
+        return this.#label_state;
     }
 
-    set_Total(value){
-        this.#acuan = value;
+    set_Label_State(value){
+        this.#label_state = document.getElementById(value);
     }
 
     get_Loop(){
         return this.#loop;
     }
 
-    set_Total(value){
+    set_Loop(value){
         this.#loop= value;
     }
 
@@ -297,6 +266,38 @@ export class Pomodoro extends Timer {
 
     set_Enter_Long_Break(value){
         this.#enter_long_break= value;
+    }
+
+    get_Button_Focus() {
+        return this.#btn_focus;
+    }
+
+    set_Button_Focus(value){
+        this.#btn_focus = document.getElementById(value);
+    }
+
+    get_Button_Break(){
+        return this.#btn_break;
+    }
+
+    set_Button_Break(value){
+        this.#btn_break = document.getElementById(value);
+    }
+
+    get_Button_Long_Break(){
+        return this.#btn_long_break;
+    }
+
+    set_Button_Long_Break(value){
+        this.#btn_long_break = document.getElementById(value);
+    }
+
+    get_Button_Save(){
+        return this.#btn_save;
+    }
+
+    set_Button_Save(value){
+        this.#btn_save = document.getElementById(value);
     }
 
     update_Time_Display(value) {
