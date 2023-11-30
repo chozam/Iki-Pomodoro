@@ -303,7 +303,7 @@ export class Pomodoro extends Timer {
     update_Time_Display(value) {
         // when user click state then display time also update with label
         this.update_Label(value);
-        clearInterval(this.get_Start_State.bind(this));
+        clearInterval(this.get_Start_State());
         this.set_Time(value * 60);
         this.get_Button_Start().innerHTML = "START";
         this.get_Button_Start().style.backgroundColor = "#f44336"
