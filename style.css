@@ -210,7 +210,7 @@ button#start:hover, button#reset:hover {
 }
 #About h2 {
     margin-bottom: 20px;
-    color: #333;
+    color: #019D83;
     font-size: 3rem;
   }
   
@@ -256,7 +256,6 @@ img {
 }
 
 footer {
-    /* background-color: #2c3e50; */
     background-color: #31304D;
     color: #ecf0f1;
     text-align: center;
