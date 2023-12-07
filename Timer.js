@@ -102,6 +102,7 @@ class Timer {
         else {
             this.#display_minute.innerHTML = minute;
         }
+
         if(second < 10) {
            this.#display_second.innerHTML = "0" + second;
         }
@@ -117,7 +118,7 @@ class Timer {
             this.#start = null;
             this.#alarm.load();
             this.#alarm.play();
-            setTimeout(this.mulai.bind(this), 3000);
+            setTimeout(this.mulai.bind(this), 2000);
         }
         this.#time--;
     }
@@ -162,14 +163,14 @@ class Timer {
 }
 
 
-export class Pomodoro extends Timer {
+export class Pomodoro extends Timer { //This is inheritance
     #time_focus;
     #time_break;
     #time_longbreak;
     #long_break_interval;
     #acuan = 1;
-    #total_focus;
-    #total = 0;
+    #total_focus; // html element for counting total focus time per session
+    #total = 0; //for counting total focus time per session
     #label_state;
     #loop = 1;
     #enter_long_break = 1;
@@ -177,7 +178,6 @@ export class Pomodoro extends Timer {
     #btn_break;
     #btn_long_break;
     #btn_save;
-
 
     constructor(time_focus, time_break, time_longbreak, interval){
         super();
@@ -232,7 +232,7 @@ export class Pomodoro extends Timer {
         return this.#total_focus;
     }
 
-    set_Total_Focus(value){
+    set_Total_Focus(value=this.#total){
         this.#total_focus = document.getElementById(value);
     }
 
@@ -240,11 +240,11 @@ export class Pomodoro extends Timer {
         return this.#total;
     }
 
-    set_Total(value){
+    set_Total(value) {
         this.#total = value;
     }
 
-    get_Label_State(){
+    get_Label_State() {
         return this.#label_state;
     }
 
@@ -300,6 +300,12 @@ export class Pomodoro extends Timer {
         this.#btn_save = document.getElementById(value);
     }
 
+    session_mem(){
+        const totalFocus = sessionStorage.getItem('total_focus');
+        this.#total = JSON.parse(totalFocus);
+        this.#total_focus.innerHTML = this.#total;
+    }
+
     update_Time_Display(value) {
         // when user click state then display time also update with label
         this.update_Label(value);
@@ -327,7 +333,7 @@ export class Pomodoro extends Timer {
         }
     }
 
-    hitungMundur(){
+    hitungMundur(){ //this is overriding method from class timer
         this.set_Time(this.get_Time()-1);
         this.update_Display();
         if (this.get_Time() == 0){
@@ -339,8 +345,9 @@ export class Pomodoro extends Timer {
             this.get_Alarm().play();
             setTimeout(this.mulai.bind(this), 3000);
         }
-        if(this.#loop % 2 == 1){
+        if (this.#loop % 2 == 1){
             this.#total_focus.innerHTML = this.#total++;
+            sessionStorage.setItem("total_focus", JSON.stringify(this.#total))
         }
     }
 
@@ -359,7 +366,7 @@ export class Pomodoro extends Timer {
         }
     }
 
-    reset(){
+    reset(){ //this is overriding method from class timer
         clearInterval(this.get_Start_State());
         this.get_Button_Start().innerHTML = "START";
         this.get_Button_Start().style.backgroundColor = "#f44336"

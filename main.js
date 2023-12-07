@@ -1,6 +1,6 @@
 import { Pomodoro } from "./Timer.js";
 
-const timer = new Pomodoro(25, 5, 15, 4);
+const timer = new Pomodoro(25, 5, 15, 4); //implement constructor
 timer.set_Label_State("label-state")
 timer.set_Display_Time("timer")
 timer.set_Display_minute("minute");
@@ -17,6 +17,7 @@ timer.set_Long_Break_Interval("set-interval")
 timer.set_Button_Save("save");
 timer.set_Alarm("music");
 timer.set_Total_Focus("total-focus");
+timer.session_mem();
 
 timer.get_Button_Focus().addEventListener("click", () => timer.update_Time_Display(timer.get_Time_Focus()));
 timer.get_Button_Break().addEventListener("click", () => timer.update_Time_Display(timer.get_Time_Break()));
