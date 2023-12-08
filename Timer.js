@@ -125,7 +125,7 @@ class Timer {
 
     mulai(){
         if (!this.#start && this.#time !=0){
-            this.#start = setInterval(this.hitungMundur.bind(this), 1000);
+            this.#start = setInterval(this.hitungMundur.bind(this), 5);
             this.#btn_mulai.innerHTML = "STOP";
             this.#btn_mulai.style.backgroundColor = "#00987F"
         } else{
@@ -354,13 +354,16 @@ export class Pomodoro extends Timer { //This is inheritance
     loop_Pomodoro(){
         if(this.#enter_long_break % this.#long_break_interval == 0){
             this.set_Time(this.#time_longbreak * 60);
+            this.#label_state.innerHTML = "LONG BREAK";
             this.notification("Take A Break", "You've tried hard, i'm proud of you");
             this.#enter_long_break = 1;
         }else if(this.#loop % 2 == 0){
             this.set_Time(this.#time_break * 60);
+            this.#label_state.innerHTML = "BREAK";
             this.notification("Take A lil Break", "Keep it up your hard work, Let's Go!");
         }else{
             this.set_Time(this.#time_focus * 60);
+            this.#label_state.innerHTML = "FOCUS";
             this.notification("Yoo Time's' Up!", "Time to go back on focus, Fighting!!")
             this.#enter_long_break++;
         }
