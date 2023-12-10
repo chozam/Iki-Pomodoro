@@ -82,8 +82,10 @@ class Timer {
         let minute = Math.floor(this.#time/60);
         let second = Math.floor(this.#time%60);
         this.#display_time.style.fontSize = "100px";
+        this.#display_minute.style.width = "120px";
         if (minute > 59){
             this.#display_time.style.fontSize = "80px";
+            this.#display_minute.style.width = "215px";
             let hour = Math.floor(minute/60);
             minute = Math.floor(minute%60);
             if(hour < 10 && minute < 10) {
@@ -92,8 +94,11 @@ class Timer {
             else if(hour < 10 && minute > 10) {
                 this.#display_minute.innerHTML = "0" + hour + "." + minute;
             }
+            else if(hour > 10 && minute < 10) {
+                this.#display_minute.innerHTML = hour + "." + "0" + minute;
+            }
             else {
-                this.#display_minute.innerHTML = hour + "" + minute;
+                this.#display_minute.innerHTML = hour + "." + minute;
             }
         }
         else if(minute < 10) {
@@ -125,13 +130,15 @@ class Timer {
 
     mulai(){
         if (!this.#start && this.#time !=0){
-            this.#start = setInterval(this.hitungMundur.bind(this), 5);
+            this.#start = setInterval(this.hitungMundur.bind(this), 1);
             this.#btn_mulai.innerHTML = "STOP";
-            this.#btn_mulai.style.backgroundColor = "#00987F"
+            if(!this.#btn_mulai.classList.contains("blue")){
+                this.#btn_mulai.classList.toggle("blue");
+            }
         } else{
             clearInterval(this.#start);
             this.#btn_mulai.innerHTML = "START";
-            this.#btn_mulai.style.backgroundColor = "#f44336"
+            this.#btn_mulai.classList.toggle("blue");
             this.#start = null;
         }
     }
@@ -139,7 +146,9 @@ class Timer {
     reset(){
         clearInterval(this.#start);
         this.#btn_mulai.innerHTML = "START";
-        this.#btn_mulai.style.backgroundColor = "#f44336"
+        if(this.#btn_mulai.classList.contains("blue")){
+            this.#btn_mulai.classList.toggle("blue");
+        }
         this.#start = null;
         this.#time = this.#starting_time;
     }
@@ -302,8 +311,10 @@ export class Pomodoro extends Timer { //This is inheritance
 
     session_mem(){
         const totalFocus = sessionStorage.getItem('total_focus');
-        this.#total = JSON.parse(totalFocus);
-        this.#total_focus.innerHTML = this.#total;
+        if(totalFocus != null) {
+            this.#total = JSON.parse(totalFocus);
+            this.#total_focus.innerHTML = this.#total;
+        }
     }
 
     update_Time_Display(value) {
@@ -312,7 +323,9 @@ export class Pomodoro extends Timer { //This is inheritance
         clearInterval(this.get_Start_State());
         this.set_Time(value * 60);
         this.get_Button_Start().innerHTML = "START";
-        this.get_Button_Start().style.backgroundColor = "#f44336"
+        if(this.get_Button_Start().classList.contains("blue")){
+            this.get_Button_Start().classList.toggle("blue");
+        }
         this.set_Start_State(null);
         this.update_Display();
     }
@@ -322,20 +335,32 @@ export class Pomodoro extends Timer { //This is inheritance
             this.#acuan = 1;
             this.#enter_long_break = 1;
             this.#label_state.innerHTML = "FOCUS";
+            this.#btn_focus.classList.add("navy-btn");
+            this.#btn_break.classList.remove("navy-btn");
+            this.#btn_long_break.classList.remove("navy-btn");
         } else if (value == this.#time_break){
             this.#acuan = 2;
             this.#enter_long_break = 1;
             this.#label_state.innerHTML = "BREAK";
+            this.#btn_focus.classList.remove("navy-btn");
+            this.#btn_break.classList.add("navy-btn");
+            this.#btn_long_break.classList.remove("navy-btn");
         } else if (value == this.#time_longbreak){
             this.#acuan = 3;
             this.#enter_long_break = 1;
             this.#label_state.innerHTML = "LONG BREAK";
+            this.#btn_focus.classList.remove("navy-btn");
+            this.#btn_break.classList.remove("navy-btn");
+            this.#btn_long_break.classList.add("navy-btn");
         }
     }
 
     hitungMundur(){ //this is overriding method from class timer
-        this.set_Time(this.get_Time()-1);
         this.update_Display();
+        if (this.#loop % 2 == 1){
+            this.#total_focus.innerHTML = this.#total++;
+            sessionStorage.setItem("total_focus", JSON.stringify(this.#total))
+        }
         if (this.get_Time() == 0){
             clearInterval(this.get_Start_State())
             this.set_Start_State(null);
@@ -345,10 +370,7 @@ export class Pomodoro extends Timer { //This is inheritance
             this.get_Alarm().play();
             setTimeout(this.mulai.bind(this), 3000);
         }
-        if (this.#loop % 2 == 1){
-            this.#total_focus.innerHTML = this.#total++;
-            sessionStorage.setItem("total_focus", JSON.stringify(this.#total))
-        }
+        this.set_Time(this.get_Time()-1);
     }
 
     loop_Pomodoro(){
@@ -357,22 +379,33 @@ export class Pomodoro extends Timer { //This is inheritance
             this.#label_state.innerHTML = "LONG BREAK";
             this.notification("Take A Break", "You've tried hard, i'm proud of you");
             this.#enter_long_break = 1;
+            this.#btn_focus.classList.remove("navy-btn");
+            this.#btn_break.classList.remove("navy-btn");
+            this.#btn_long_break.classList.add("navy-btn");
         }else if(this.#loop % 2 == 0){
             this.set_Time(this.#time_break * 60);
             this.#label_state.innerHTML = "BREAK";
             this.notification("Take A lil Break", "Keep it up your hard work, Let's Go!");
+            this.#btn_focus.classList.remove("navy-btn");
+            this.#btn_break.classList.add("navy-btn");
+            this.#btn_long_break.classList.remove("navy-btn");
         }else{
             this.set_Time(this.#time_focus * 60);
             this.#label_state.innerHTML = "FOCUS";
             this.notification("Yoo Time's' Up!", "Time to go back on focus, Fighting!!")
             this.#enter_long_break++;
+            this.#btn_focus.classList.add("navy-btn");
+            this.#btn_break.classList.remove("navy-btn");
+            this.#btn_long_break.classList.remove("navy-btn");
         }
     }
 
     reset(){ //this is overriding method from class timer
         clearInterval(this.get_Start_State());
         this.get_Button_Start().innerHTML = "START";
-        this.get_Button_Start().style.backgroundColor = "#f44336"
+        if(this.get_Button_Start().classList.contains("blue")) {
+            this.get_Button_Start().classList.toggle("blue");
+        }
         this.set_Start_State(null);
         if (this.#acuan == 1) {
             this.set_Time(this.#time_focus * 60);

@@ -24,7 +24,7 @@
         </audio>
         <div id="pomodoro">
            <div id="display-timer">
-            <div>
+            <div id="label">
                 <span class="label-timer warna-focus" id="label-state">FOCUS</span>
                 <span class="label-timer">SESSION</span>
             </div>
@@ -35,7 +35,7 @@
             </div>
            </div>
            <div class="state-pdmr">
-            <button id="btn-focus">FOCUS</button>
+            <button id="btn-focus" class="navy-btn">FOCUS</button>
             <button id="btn-break">BREAK</button>
             <button id="btn-long-break">LONG BREAK</button>
            </div>
@@ -92,9 +92,14 @@
         </div>
     </section>
     <footer>
-        <p>&copy; 2023 Chozam. All rights reserved.
+        <p>&copy; <span id="currentYear">2023</span> Chozam. All rights reserved.
 
         </p></footer>
-    <script type="module" src="main.js"></script>
+<script type="module" src="main.js"></script>
+<script>
+    currentDate = new Date();
+    var year = currentDate.getFullYear();
+    currentYear = document.getElementById("currentYear").innerHTML = year;
+</script>
 </body>
 </html>

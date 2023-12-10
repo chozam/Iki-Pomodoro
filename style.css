@@ -99,11 +99,22 @@ header p {
 
 #timer{
     display: flex;
+    justify-content: center;
+    align-items: center;
     color: #EF7F85; 
     font-size: 100px; 
-    font-weight: 700; 
+    font-weight: 700;
 }
 
+#minute, #second {
+    display: inline-block;
+    width: 120px;
+}
+
+#label{
+    display: inline-block;
+    text-align: center;
+}
 .label-timer{
     color: #EF7F85; 
     font-size: 20px; 
@@ -123,8 +134,8 @@ button {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    }
-    
+}
+
 button:hover {
     background-color: #45a049;
 }
@@ -134,11 +145,11 @@ input {
     width: 90px;
 }
 
-button#start, button#reset {
+#start, #reset {
     background-color: #f44336;
 }
 
-button#start:hover, button#reset:hover {
+#start:hover, #reset:hover {
     background-color: #d32f2f;
 }
 
@@ -253,6 +264,22 @@ img {
     font-size: 20px;
     width: 50vw;
     padding: 20px;
+}
+
+.blue {
+    background-color: #00987F !important;
+}
+
+.blue:hover {
+    background-color: #092635 !important;
+}
+
+.navy-btn {
+    background-color: #092635 !important;
+}
+
+.navy-btn:hover {
+    background-color: #04141b !important;
 }
 
 footer {
