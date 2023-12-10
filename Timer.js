@@ -130,7 +130,7 @@ class Timer {
 
     mulai(){
         if (!this.#start && this.#time !=0){
-            this.#start = setInterval(this.hitungMundur.bind(this), 1);
+            this.#start = setInterval(this.hitungMundur.bind(this), 1000);
             this.#btn_mulai.innerHTML = "STOP";
             if(!this.#btn_mulai.classList.contains("blue")){
                 this.#btn_mulai.classList.toggle("blue");
